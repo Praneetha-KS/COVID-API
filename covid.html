@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>COVID-19 Tracking API</title>
+    <style>
+        /* CSS Styles */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f4f4;
+}
+
+header {
+    background-color: #333;
+    color: #fff;
+    padding: 1em;
+    text-align: center;
+}
+
+header h1 {
+    margin: 0;
+}
+
+.container {
+    padding: 20px;
+}
+
+section {
+    background-color: #fff;
+    padding: 20px;
+    margin-bottom: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+h2 {
+    color: #333;
+}
+
+button {
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 4px;
+    cursor: pointer;
+    margin-bottom: 10px;
+}
+
+button:hover {
+    background-color: #0056b3;
+}
+
+.result {
+    font-family: monospace;
+    white-space: pre-wrap;
+    color: #555;
+    padding: 10px;
+    background-color: #f9f9f9;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+}
+
+    </style>
+</head>
+
+<body>
+    <header>
+        <h1>COVID-19 Tracking and Information</h1>
+    </header>
+
+    <div class="container">
+        <!-- COVID-19 Cases Section -->
+        <section id="covid-cases">
+            <h2>COVID-19 Cases</h2>
+            <button onclick="fetchCovidCases()">Get COVID-19 Cases</button>
+            <div id="casesResult" class="result"></div>
+        </section>
+
+        <!-- COVID-19 Vaccination Status -->
+        <section id="vaccination-status">
+            <h2>Vaccination Status</h2>
+            <button onclick="fetchVaccinationStatus()">Get Vaccination Status</button>
+            <div id="vaccinationResult" class="result"></div>
+        </section>
+
+        <!-- Hospital Resources Section -->
+        <section id="hospital-resources">
+            <h2>Hospital Resources</h2>
+            <button onclick="fetchHospitalResources()">Get Hospital Resources</button>
+            <div id="hospitalResourcesResult" class="result"></div>
+        </section>
+    </div>
+
+    <script src="covid.js"></script>
+</body>
+
+</html>
