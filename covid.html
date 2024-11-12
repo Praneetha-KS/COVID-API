@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>COVID-19 Tracker</title>
+    <style>
+        /* General body styling */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f9f9f9;
+            color: #333;
+        }
+
+        /* Main container styling */
+        .container {
+            width: 80%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        /* Heading styles */
+        h1 {
+            font-size: 2.5rem;
+            color: #2c3e50;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        h2 {
+            font-size: 1.8rem;
+            color: #34495e;
+            margin-bottom: 10px;
+        }
+
+        /* Section styling */
+        .section {
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            margin-bottom: 20px;
+        }
+
+        /* Button styling */
+        .btn {
+            background-color: #3498db;
+            color: white;
+            padding: 12px 24px;
+            font-size: 1rem;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .btn:hover {
+            background-color: #2980b9;
+        }
+
+        /* Preformatted text styling */
+        pre {
+            background-color: #ecf0f1;
+            padding: 15px;
+            border-radius: 5px;
+            border: 1px solid #bdc3c7;
+            font-size: 1rem;
+            overflow-x: auto;
+            white-space: pre-wrap;
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2rem;
+            }
+
+            .section {
+                padding: 15px;
+            }
+
+            .btn {
+                padding: 10px 20px;
+                font-size: 0.9rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h1>COVID-19 Tracker</h1>
+
+        <div class="section">
+            <h2>COVID-19 Cases</h2>
+            <button class="btn" onclick="fetchCovidCases()">Fetch Cases</button>
+            <pre id="casesResult">Results will be displayed here...</pre>
+        </div>
+
+        <div class="section">
+            <h2>Vaccination Status</h2>
+            <button class="btn" onclick="fetchVaccinationStatus()">Fetch Vaccination Status</button>
+            <pre id="vaccinationResult">Results will be displayed here...</pre>
+        </div>
+
+        <div class="section">
+            <h2>Hospital Resources</h2>
+            <button class="btn" onclick="fetchHospitalResources()">Fetch Hospital Resources</button>
+            <pre id="hospitalResult">Results will be displayed here...</pre>
+        </div>
+    </div>
+
+    <script>
+        async function fetchCovidCases() {
+            try {
+                const response = await fetch('/covid/cases');
+                const data = await response.json();
+                document.getElementById('casesResult').textContent = JSON.stringify(data, null, 2);
+            } catch (error) {
+                document.getElementById('casesResult').textContent = 'Error fetching COVID-19 cases';
+            }
+        }
+
+        async function fetchVaccinationStatus() {
+            try {
+                const response = await fetch('/covid/vaccination-status');
+                const data = await response.json();
+                document.getElementById('vaccinationResult').textContent = JSON.stringify(data, null, 2);
+            } catch (error) {
+                document.getElementById('vaccinationResult').textContent = 'Error fetching vaccination status';
+            }
+        }
+
+        async function fetchHospitalResources() {
+            try {
+                const response = await fetch('/covid/hospitals/resources');
+                const data = await response.json();
+                document.getElementById('hospitalResult').textContent = JSON.stringify(data, null, 2);
+            } catch (error) {
+                document.getElementById('hospitalResult').textContent = 'Error fetching hospital resources';
+            }
+        }
+    </script>
+
+</body>
+</html>
