@@ -1,0 +1,35 @@
+import time
+import requests
+import random
+
+# Constants for ThingSpeak
+THINGSPEAK_API_KEY = 'YOUR_THINGSPEAK_API_KEY'
+THINGSPEAK_URL = 'https://api.thingspeak.com/update'
+
+# Function to simulate reading soil moisture
+def simulate_soil_moisture():
+    # Generate a random moisture level between 0 (dry) and 1023 (wet)
+    moisture_level = random.randint(0, 1023)
+    return moisture_level
+
+# Function to upload data to ThingSpeak
+def upload_to_thingspeak(moisture_level):
+    payload = {
+        'api_key': THINGSPEAK_API_KEY,
+        'field1': moisture_level
+    }
+    response = requests.post(THINGSPEAK_URL, data=payload)
+    if response.status_code == 200:
+        print("Data uploaded successfully:", moisture_level)
+    else:
+        print("Failed to upload data:", response.status_code)
+
+# Main loop
+try:
+    while True:
+        moisture_level = simulate_soil_moisture()  # Simulate reading the moisture level
+        print("Simulated Soil Moisture Level:", moisture_level)
+        upload_to_thingspeak(moisture_level)  # Upload to ThingSpeak
+        time.sleep(15)  # Wait for 15 seconds before the next reading
+except KeyboardInterrupt:
+    print("Program stopped by user.")
